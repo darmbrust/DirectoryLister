@@ -1,0 +1,105 @@
+<project name="Directory Lister" default="all" basedir=".">
+	<description>
+		Buildfile for the Indexer Service
+	</description>
+	<!-- set global properties for this build -->
+	<property name="src"   location="src"/>
+	<property name="lib"   location="extLib"/>
+	<property name="antBuild" location="antBuild"/>
+	<property name="classes" location="${antBuild}/classes"/>
+	<property name="dist"  location="${antBuild}/lib"/>
+	<property name="zipOutput"  location="${antBuild}/directoryLister.zip"/>
+	<property name="javadocs"  location="docs/javadocs"/>
+	<property name="bin"  location="bin"/>
+
+	<!--Sets up the classpaths correctly, not meant to be called directly-->
+	<target name="init">
+		<echo>Constructing classpath</echo>
+		
+		<path id="classpath">
+			<fileset dir="${lib}" id="libs"> <!--//used for jarDepen-->
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+	</target>
+
+
+	<target name="clean" depends="init" description="clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${antBuild}"/>
+		<delete dir="${javadocs}"/>
+		<delete dir="${bin}" failonerror="false"/>
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<mkdir dir="${classes}"/>
+		
+		<copy todir="${classes}">
+			<fileset dir="${src}">
+				<include name="**/*.gif"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${classes}/" file="license.txt"/>
+
+		<!-- Compile the java code from ${src} into ${classes} -->
+		<javac debug="true" srcdir="${src}" destdir="${classes}">
+			<classpath refid="classpath"/>
+		</javac>
+	</target>
+
+	<target name="jar" depends="init, compile" description="generate the jar file" >
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}"/>
+		<!-- Put everything in ${build} into .jar file -->
+		<jar jarfile="${dist}/directoryListerOnly.jar" basedir="${classes}">
+			<manifest>
+				<attribute name="Main-Class" value="directoryLister.DirectoryLister"/>
+				<attribute name="Author" value="Daniel Armbrust - daniel.armbrust@gmail.com"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="jarDepen" depends="init, compile" description="generate the jar file plus the dependancies" >
+		<!-- Put everything in ${build} into .jar file -->
+		<mkdir dir="${dist}"/>
+		<jar jarfile="${dist}/directoryLister.jar" basedir="${classes}">
+			<manifest>
+				<attribute name="Main-Class" value="directoryLister.DirectoryLister"/>
+				<attribute name="Author" value="Daniel Armbrust - daniel.armbrust@gmail.com"/>
+			</manifest>
+			<zipgroupfileset refid="libs"/>
+		</jar>
+	</target>
+
+	<target name="javadocs" depends="init, compile" description="Generate the javadocs">
+		<mkdir dir="${javadocs}"/>
+		<!--Create the javadocs-->
+		<javadoc destdir="${javadocs}" windowtitle="Directory Lister" Doctitle="Directory Lister Classes">
+			<package name="*"/>
+			<classpath refid="classpath"/>
+			<sourcepath location="${src}"/>
+		</javadoc>
+	</target>
+	
+	<target name="scripts" depends="jarDepen" description="Generated the launch scripts">
+		<!-- Write out the startup scripts-->
+		<mkdir dir="${bin}"/>
+		<echo>Creating windows start script</echo>
+		<echo file="${bin}/directoryLister.bat">
+java -jar ../antBuild/lib/directoryLister.jar 
+		</echo>
+		<copy file="${bin}/directoryLister.bat" tofile="${bin}/directoryLister.sh"/>
+
+		<!-- give them the right line endings-->
+		<fixcrlf srcdir="${bin}" eol="crlf" includes="**/*.bat"/>
+		<fixcrlf srcdir="${bin}" eol="lf" includes="**/*.sh"/>
+		<chmod dir="${bin}" perm="ugo+rx" includes="**/*.sh"/>
+	</target>
+	
+	<target name="signJar">
+		<signjar jar="${dist}/directoryLister.jar" alias="dan" keystore="myKeystore" storepass="myKeystorePass"/>
+	</target>
+
+	<target name="all" depends="init, clean, compile, jar, jarDepen, javadocs, scripts, signJar" description="cleans, compiles, jars, docs"/>
+</project>

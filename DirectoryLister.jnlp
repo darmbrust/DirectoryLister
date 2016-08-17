@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.0+"
+  codebase="http://armbrust.dyndns.org:81/programs/"
+  href="DirectoryLister.jnlp">
+  <information>
+    <title>Directory Lister</title>
+    <vendor>Daniel Armbrust</vendor>
+    <homepage href="http://armbrust.dyndns.org:81/programs/"/>
+    <description>Directory Lister Application</description>
+    <!--icon href="images/swingset2.jpg"/>
+    <icon kind="splash" href="images/splash.gif"/-->
+    <offline-allowed/>
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.4+"/>
+    <jar href="directoryLister.jar"/>
+  </resources>
+  <application-desc main-class="directoryLister.DirectoryLister"/>
+</jnlp> 
