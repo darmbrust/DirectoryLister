@@ -34,7 +34,7 @@ You will need to have Java version 1.8 or newer installed to use this program. Y
 
 (you agree to [this](LICENSE) license by downloading this software)
 
-Download just the executable [directoryLister.jar](https://github.com/darmbrust/BackupTool/releases/download/1/directoryLister.jar). 
+Download just the executable [directoryLister.jar](https://github.com/darmbrust/DirectoryLister/releases/download/1/directoryLister.jar). 
 If you have java installed correctly on your machine, simply double clicking on the file should launch the program. If not, try "java -jar directoryLister.jar".
 
 **Bugs**
