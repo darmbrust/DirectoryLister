@@ -1,7 +1,8 @@
 # DirectoryLister
 Simple tool for creating text files that represent the (recursive) contents of a directory
 
-This program is a Directory/File lister. You just point it at a directory on your computer, select some options, and click Process. It will then give you a text file of all of the contents of that directory.
+This program is a Directory/File lister. You just point it at a directory on your computer, select some options, and click Process. 
+It will then give you a text file of all of the contents of that directory.
 Features
 
  - Written in Java - works on any platform java runs on - including Linux, Mac, and if your in a pinch, Windows.
@@ -23,21 +24,18 @@ Features
 
 **Screen Shot**
 
-![](http://armbrust.dyndns.org/programs/directoryLister/directoryLister.jpg)
+![](https://user-images.githubusercontent.com/5016252/148860871-dcf19abb-6b46-42b6-a4e8-f107fa5f5b04.jpg)
 
 **Requirements**
 
-You will need to have Java version 1.4 or newer installed to use this program. You can get it here, if you need it.
+You will need to have Java version 1.8 or newer installed to use this program. You can get it [here](https://adoptopenjdk.net/), if you need it.
 
 **Download**
 
 (you agree to [this](LICENSE) license by downloading this software)
 
-Click [here](http://armbrust.dyndns.org/programs/directoryLister/DirectoryLister.jnlp) to launch the program with webstart .
-
-Note: When you first start the program, java will recommend that you not run the program because their is no proper signing authority. You will just have trust that no one has hacked my webserver, and replaced the program with a malicious one.
-
-Otherwise, you can download just the executable [directoryLister.jar](http://armbrust.dyndns.org/programs/directoryLister/directoryLister.jar). If you have java installed correctly on your machine, simply double clicking on the file should launch the program. If not, try "java -jar directoryLister.jar".
+Download just the executable [directoryLister.jar](https://github.com/darmbrust/BackupTool/releases/download/1/directoryLister.jar). 
+If you have java installed correctly on your machine, simply double clicking on the file should launch the program. If not, try "java -jar directoryLister.jar".
 
 **Bugs**
 

@@ -40,7 +40,7 @@
 			</fileset>
 		</copy>
 		
-		<copy todir="${classes}/" file="license.txt"/>
+		<copy todir="${classes}/" file="LICENSE"/>
 
 		<!-- Compile the java code from ${src} into ${classes} -->
 		<javac debug="true" srcdir="${src}" destdir="${classes}">
@@ -96,10 +96,6 @@ java -jar ../antBuild/lib/directoryLister.jar
 		<fixcrlf srcdir="${bin}" eol="lf" includes="**/*.sh"/>
 		<chmod dir="${bin}" perm="ugo+rx" includes="**/*.sh"/>
 	</target>
-	
-	<target name="signJar">
-		<signjar jar="${dist}/directoryLister.jar" alias="dan" keystore="myKeystore" storepass="myKeystorePass"/>
-	</target>
 
-	<target name="all" depends="init, clean, compile, jar, jarDepen, javadocs, scripts, signJar" description="cleans, compiles, jars, docs"/>
+	<target name="all" depends="init, clean, compile, jar, jarDepen, javadocs, scripts" description="cleans, compiles, jars, docs"/>
 </project>
